@@ -3,10 +3,12 @@ export const mapService = {
   addMarker,
   panTo,
   codeAddress,
+  getLastLoc,
 };
 
 let gMap, infoWindow;
 let gMarkers = [];
+let gLocs;
 
 function initMap(lat = 32.0749831, lng = 34.9120554) {
   console.log('InitMap');
@@ -18,7 +20,7 @@ function initMap(lat = 32.0749831, lng = 34.9120554) {
     });
     console.log('Map!', gMap);
 
-    infoWindow = new google.maps.InfoWindow();
+    // infoWindow = new google.maps.InfoWindow();
     const locationButton = document.querySelector('button');
     gMap.controls[google.maps.ControlPosition.TOP_CENTER].push(locationButton);
     gMap.addListener('click', (mapsMouseEvent) => {
@@ -26,8 +28,13 @@ function initMap(lat = 32.0749831, lng = 34.9120554) {
       let lat = JSON.stringify(mapsMouseEvent.latLng.toJSON().lat);
       let lng = JSON.stringify(mapsMouseEvent.latLng.toJSON().lng);
       addMarker({ lat: +lat, lng: +lng });
+      gLocs = [{ lat: +lat, lng: +lng }];
     });
   });
+}
+
+function getLastLoc() {
+  return gLocs;
 }
 
 function removeMarker() {

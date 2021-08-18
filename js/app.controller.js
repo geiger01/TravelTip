@@ -64,5 +64,5 @@ function renderLocation(location) {
 }
 
 function onAddLocation() {
-  console.log('ads');
+  const lastPos = mapService.getLastLoc();
 }
