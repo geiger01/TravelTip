@@ -162,6 +162,7 @@ height: 100%;
 .item {
   display: flex;
   flex-direction: column;
+  font-family: 'Roboto', sans-serif;
 }
 
 .weather-container {
