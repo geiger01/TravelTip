@@ -7,7 +7,6 @@ function getWeatherByLocation(location, onSuccess){
     const API_WEATHER_KEY = '83c7a3c9dfa5c1fb2ef752bc8648d37b';
     axios.get(`http://api.openweathermap.org/data/2.5/weather?lat=${location.lat}&lon=${location.lng}&APPID=${API_WEATHER_KEY}&units=metric`)
         .then(res=>{
-            console.log('weather success:')
             const data = res.data;
             const weatherData = {
               temp: data.main.temp.toFixed(0),

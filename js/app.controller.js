@@ -9,9 +9,12 @@ export const appController = {
 window.onload = onInit;
 window.onAddMarker = onAddMarker;
 window.onPanTo = onPanTo;
-window.onGetLocs = onGetLocs;
 window.onGetUserPos = onGetUserPos;
 window.onAddLocation = onAddLocation;
+document.querySelector('#map').addEventListener('click', ()=>{
+    onAddMarker(mapService.getLastLoc()[0]);
+});
+
 window.gSavedLocs = [];
 
 function onInit() {
@@ -32,17 +35,8 @@ function getPosition() {
     });
 }
 
-function onAddMarker() {
-    console.log('Adding a marker');
-    mapService.addMarker({ lat: 32.0749831, lng: 34.9120554 });
-    weatherService.getWeatherByLocation({lat: 32.0749831, lng: 34.9120554}, renderWeather);
-}
-
-function onGetLocs() {
-    locService.getLocs().then((locs) => {
-        console.log('Locations:', locs);
-        document.querySelector('.locs').innerText = JSON.stringify(locs);
-    });
+function onAddMarker(loc) {
+    weatherService.getWeatherByLocation(loc, renderWeather);
 }
 
 function onGetUserPos() {
@@ -76,11 +70,10 @@ function onAddLocation() {
   const lastPos = mapService.getLastLoc();
   const name = document.querySelector('.location').innerText;
   console.log(name);
-   lastPos['name'] = name;
+  lastPos['name'] = name;
  
-    gSavedLocs.push(lastPos);
-    renderSavedLocs(gSavedLocs)
- 
+  gSavedLocs.push(lastPos);
+  renderSavedLocs(gSavedLocs)
 }
 
 function renderWeather(weatherData){
