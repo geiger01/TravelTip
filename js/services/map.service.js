@@ -21,6 +21,7 @@ function initMap(lat = 32.0749831, lng = 34.9120554) {
             center: { lat, lng },
             zoom: 15,
         });
+        getAddressByLatLng({ lat, lng }, appController.renderLocation)
         console.log('Map!', gMap);
 
         infoWindow = new google.maps.InfoWindow();
