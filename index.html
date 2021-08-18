@@ -1,52 +1,50 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" href="styles/style.css" />
-    <title>TravelTip</title>
-  </head>
 
-  <body>
-    <header class="main-header">
-      <nav class="main-nav main-layout">
-        <h1 class="logo">TravelTip</h1>
-        <div class="search-container">
-          <input
-            class="location-input"
-            type="text"
-            placeholder="Enter Location"
-          />
-          <div onclick="onPanTo()" class="go">Go</div>
-          <div onclick="onGetUserPos()" class="my-location">My Location</div>
-        </div>
-      </nav>
-    </header>
-    <main class="main-container main-layout">
-      <div class="current-location-container">
-        <h3>Location: <span class="location"></span></h3>
-      <div onclick="onAddLocation()" class="add-btn">Add Location</div>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles/style.css" />
+  <title>TravelTip</title>
+</head>
 
+<body>
+  <header class="main-header">
+    <nav class="main-nav main-layout">
+      <h1 class="logo">TravelTip</h1>
+      <div class="search-container">
+        <input class="location-input" type="text" placeholder="Enter Location" />
+        <div onclick="onPanTo()" class="go">Go</div>
+        <div onclick="onGetUserPos()" class="my-location">My Location</div>
       </div>
-      <div class="content-container">
-        <div class="locations-container">
-          <div class="item">Locations: <span class="locs"></span></div>
-        </div>
-        <div class="weather-container">
-          <!-- Weather data goes here -->
-        </div>
-        <div id="map"></div>
+    </nav>
+  </header>
+  <main class="main-container main-layout">
+    <div class="current-location-container">
+      <h3>Location: <span class="location"></span></h3>
+      <div class="btns-container">
+
+        <div onclick="onAddLocation()" class="add-btn">Add Location</div>
+        <div onclick="onCopyLocation()" class="copy-location">Copy Location</div>
       </div>
+    </div>
+    <div class="content-container">
+      <div class="locations-container">
+        <div class="item">Locations: <span class="locs"></span></div>
+      </div>
+      <div class="weather-container">
+        <!-- Weather data goes here -->
+      </div>
+      <div id="map"></div>
+    </div>
 
 
-    </main>
-    <script type="module" src="js/app.controller.js"></script>
-    <script src="lib/axios.js"></script>
-  </body>
+  </main>
+  <script type="module" src="js/app.controller.js"></script>
+  <script src="lib/axios.js"></script>
+</body>
+
 </html>

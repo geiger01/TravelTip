@@ -57,10 +57,7 @@ body {
   transition: background-color 0.3s;
 }
 
-.go:hover,
-.my-location:hover,
-.copy-location-btn:hover,
-.add-btn:hover {
+.go:hover, .my-location:hover, .copy-location-btn:hover, .add-btn:hover {
   background-color: rgb(168, 168, 168);
 }
 
@@ -113,7 +110,7 @@ body {
 }
 
 .current-location-container h3 {
-  font-size: 2rem;
+  font-size: 1.5rem;
   color: #414141;
 }
 
@@ -146,18 +143,15 @@ body {
 
 .locations-container {
   padding: 1rem;
-  background-color: rgb(168, 168, 168,0.4);
+  background-color: rgb(168, 168, 168, 0.4);
   grid-area: locations;
   display: flex;
   flex-direction: column;
   /* align-items: center; */
   color: #474747;
   gap: 10px;
-height: 100%;
+  height: 100%;
 }
-
-
-
 
 .item {
   display: flex;
@@ -171,44 +165,42 @@ height: 100%;
   padding: 1rem;
   background-color: rgba(31, 142, 247, 0.2);
   grid-area: weather;
-
   display: flex;
   justify-content: space-around;
   align-items: center;
   text-align: center;
 }
 
-.weather-container img{
+.weather-container img {
   height: 100px;
   width: 100px;
 }
 
-.weather-data{
+.weather-data {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
 }
 
-.weather-row{
+.weather-row {
   display: flex;
-  flex-direction:row;
+  flex-direction: row;
   justify-content: space-between;
 }
 
-.weather-row>*{
+.weather-row>* {
   padding: 0 1rem;
 }
 
-.top-row{
+.top-row {
   margin-bottom: 1rem;
 }
 
-.bottom-row{
-  
+.bottom-row {
   margin-top: 1rem;
 }
 
-.add-btn {
+.add-btn, .copy-location {
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -221,12 +213,12 @@ height: 100%;
   margin-top: 0.5rem;
 }
 
-.actions{
+.actions {
   display: flex;
   gap: 1rem;
 }
 
-.loc-actions{
+.loc-actions {
   margin-bottom: 1rem;
   margin-top: 1rem;
   cursor: pointer;
@@ -237,15 +229,14 @@ height: 100%;
   height: 1.5rem;
   background-color: rgb(46, 46, 46);
   color: #dddddd;
-
   transition: background-color .3s;
 }
 
-.loc-actions:hover{
+.loc-actions:hover {
   background-color: rgb(180, 180, 180);
 }
 
-.locs{
+.locs {
   overflow-y: scroll;
   height: 15rem;
 }
@@ -266,7 +257,6 @@ height: 100%;
   background-color: #d1b9b9;
 }
 
-
 #map {
   grid-area: map;
 }
@@ -279,6 +269,7 @@ height: 100%;
     width: 26rem;
   }
 }
+
 @media screen and (max-width: 1024px) {
   .main-layout {
     max-width: 950px;
@@ -286,7 +277,17 @@ height: 100%;
   #map {
     width: 23rem;
   }
+  .current-location-container {
+    flex-direction: column;
+    align-items: center;
+  }
+  .btns-container {
+    display: flex;
+    gap: 30px;
+    margin-top: 1rem;
+  }
 }
+
 @media screen and (max-width: 964px) {
   .main-layout {
     max-width: 850px;
@@ -295,14 +296,19 @@ height: 100%;
     width: 20rem;
   }
 }
+
 @media screen and (max-width: 860px) {
   .main-layout {
     max-width: 700px;
   }
   .current-location-container h3 {
-    font-size: 1.5rem;
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
   }
-
+  .current-location-container {
+    flex-direction: column;
+    align-items: center;
+  }
   #map {
     width: 100%;
     height: 400px;
@@ -324,17 +330,23 @@ height: 100%;
     width: 10rem;
     height: 2rem;
   }
-
   .copy-location-btn {
     width: 9rem;
     height: 2rem;
   }
+  .btns-container {
+    display: flex;
+    gap: 10px;
+  }
 }
+
 @media screen and (max-width: 745px) {
+  .logo {
+    padding-left: 1rem;
+  }
   .main-layout {
     max-width: 650px;
   }
-
   #map {
     width: 100%;
     height: 400px;
@@ -346,18 +358,29 @@ height: 100%;
     max-width: 100%;
   }
   .search-container .my-location {
-    width: 4.4rem;
-    height: 2rem;
+    width: 7rem;
+    height: 2.2rem;
+    margin-right: 1rem;
+    padding: 0.5rem;
+    font-size: 1rem;
+  }
+  .btns-container {
+    display: flex;
+    gap: 10px;
   }
 }
+
 @media screen and (max-width: 680px) {
   .logo {
     display: none;
   }
-
   #map {
     width: 100%;
     height: 400px;
+  }
+  .main-container {
+    padding-left: 1rem;
+    padding-right: 1rem;
   }
   .content-container {
     /* width: 100%; */
@@ -368,6 +391,7 @@ height: 100%;
   }
   .search-container .my-location {
     font-size: 0.8rem;
+    height: 2rem;
   }
   .search-container input {
     font-size: 0.8rem;
@@ -378,38 +402,38 @@ height: 100%;
   .copy-location-btn {
     font-size: 0.7rem;
   }
-
   .locations-container .item span {
     font-size: 0.6rem;
   }
-
-   .current-location-container{
-     flex-direction: column;
-     align-items: center;
-     margin-bottom: 1rem;
-   }
-
-   .current-location-container h3{
-     font-size: 1rem;
-    }
-    .current-location-container .add-btn{
-      width: 8rem;
-      height: 2rem;
-      font-size: 1rem;
-    }
-/*     
+  .current-location-container {
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 1rem;
+  }
+  .current-location-container h3 {
+    font-size: 1rem;
+  }
+  .btns-container {
+    display: flex;
+    gap: 10px;
+  }
+  .current-location-container .add-btn, .copy-location {
+    width: 8rem;
+    height: 2rem;
+    font-size: 1rem;
+  }
+  .location-input {
+    margin-left: 1rem;
+  }
+  /*     
     .weather-container p{
      font-size: 1rem;
      
     } */
-
-    .weather-container{
-     font-size:.8rem;
-
-   }
-    .weather-container img{
-     display: none;
-
-   }
- 
+  .weather-container {
+    font-size: .8rem;
+  }
+  .weather-container img {
+    display: none;
+  }
 }

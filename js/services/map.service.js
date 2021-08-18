@@ -14,6 +14,16 @@ let gMarkers = [];
 let gLocs;
 
 function initMap(lat = 32.0749831, lng = 34.9120554) {
+    var lat = lat;
+    var lng = lng;
+
+    const params = new URLSearchParams(window.location.search)
+    const queryLat = params.get('lat');
+    const queryLng = params.get('lng');
+    if (queryLat && queryLng) {
+        lat = +queryLat;
+        lng = +queryLng;
+    }
     console.log('InitMap');
     return _connectGoogleApi().then(() => {
         console.log('google available');
@@ -36,11 +46,12 @@ function initMap(lat = 32.0749831, lng = 34.9120554) {
             gLocs = [{ lat: +lat, lng: +lng }];
 
         });
-        
+
     });
 }
 
 function getLastLoc() {
+    console.log(gLocs)
     return gLocs;
 }
 
@@ -114,3 +125,4 @@ function getAddressByLatLng(pos, onSuccess) {
             onSuccess(response.data.results[0]['formatted_address']);
         });
 }
+

@@ -6,6 +6,7 @@ export const appController = {
     renderLocation,
 };
 
+window.onCopyLocation = onCopyLocation;
 window.onload = onInit;
 window.onAddMarker = onAddMarker;
 window.onPanTo = onPanTo;
@@ -13,18 +14,18 @@ window.onGetUserPos = onGetUserPos;
 window.onAddLocation = onAddLocation;
 window.onGoToLoc = onGoToLoc;
 window.onDeleteLoc = onDeleteLoc;
-document.querySelector('#map').addEventListener('click', ()=>{
+document.querySelector('#map').addEventListener('click', () => {
     onAddMarker(mapService.getLastLoc()[0]);
 });
 
 
 function onInit() {
-  renderSavedLocs()
+    renderSavedLocs()
     mapService
         .initMap()
         .then(() => {
             console.log('Map is ready');
-            weatherService.getWeatherByLocation({lat: 32.0749831, lng: 34.9120554}, renderWeather);
+            weatherService.getWeatherByLocation({ lat: 32.0749831, lng: 34.9120554 }, renderWeather);
         })
         .catch(() => console.log('Error: cannot init map'));
 }
@@ -66,15 +67,15 @@ function renderLocation(location) {
 }
 
 function onAddLocation() {
-  const lastPos = mapService.getLastLoc();
-  const name = document.querySelector('.location').innerText;
+    const lastPos = mapService.getLastLoc();
+    const name = document.querySelector('.location').innerText;
 
-  lastPos[0].name = name;
-  locService.saveLocation(lastPos)
-  renderSavedLocs()
+    lastPos[0].name = name;
+    locService.saveLocation(lastPos)
+    renderSavedLocs()
 }
 
-function renderWeather(weatherData){
+function renderWeather(weatherData) {
     const elWeatherData = document.querySelector('.weather-container');
 
     const weatherStr = `
@@ -95,14 +96,14 @@ function renderWeather(weatherData){
     elWeatherData.innerHTML = weatherStr;
 }
 
-function renderSavedLocs(){
+function renderSavedLocs() {
 
     let strHtml = ''
-     const locs= locService.getLocsForDisplay()
+    const locs = locService.getLocsForDisplay()
     //  console.log(loc);
 
     locs.map(loc => {
-      strHtml += `
+        strHtml += `
       <h4>${loc[0].name}</h4>
       <div class="actions">
       <div onclick="onGoToLoc(${loc[0].lat},${loc[0].lng})" class="loc-actions">Go</div>
@@ -111,16 +112,34 @@ function renderSavedLocs(){
       `
     })
 
-    document.querySelector('.locs').innerHTML=strHtml;
+    document.querySelector('.locs').innerHTML = strHtml;
 }
 
-function onGoToLoc(lat,lng){
-  weatherService.getWeatherByLocation({lat, lng}, renderWeather);
-  mapService.panTo(lat,lng)
+function onGoToLoc(lat, lng) {
+    weatherService.getWeatherByLocation({ lat, lng }, renderWeather);
+    mapService.panTo(lat, lng)
 }
 
-function onDeleteLoc(id){
+function onDeleteLoc(id) {
 
-  locService.deleteLoc(id)
-  renderSavedLocs()
+    locService.deleteLoc(id)
+    renderSavedLocs()
+}
+
+function onCopyLocation() {
+    var loc = mapService.getLastLoc();
+    let url = 'https://geiger01.github.io/TravelTip/index.html?'
+    const params = new URLSearchParams({
+        lat: loc[0].lat,
+        lng: loc[0].lng,
+    });
+
+    const body = document.querySelector('body');
+    const area = document.createElement('textarea');
+    body.appendChild(area);
+
+    area.value = url += params.toString();
+    area.select();
+    document.execCommand('copy');
+    body.removeChild(area);
 }
