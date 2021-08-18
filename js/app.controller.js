@@ -62,3 +62,7 @@ function onPanTo() {
 function renderLocation(location) {
   document.querySelector('.location').innerText = location;
 }
+
+function onAddLocation() {
+  console.log('ads');
+}

@@ -1,107 +1,97 @@
 export const mapService = {
-    initMap,
-    addMarker,
-    panTo,
-    codeAddress,
+  initMap,
+  addMarker,
+  panTo,
+  codeAddress,
 };
 
 let gMap, infoWindow;
 let gMarkers = [];
 
 function initMap(lat = 32.0749831, lng = 34.9120554) {
-    console.log('InitMap');
-    return _connectGoogleApi().then(() => {
-        console.log('google available');
-        gMap = new google.maps.Map(document.querySelector('#map'), {
-            center: { lat, lng },
-            zoom: 15,
-        });
-        console.log('Map!', gMap);
-
-        infoWindow = new google.maps.InfoWindow();
-        const locationButton = document.querySelector('button');
-        gMap.controls[google.maps.ControlPosition.TOP_CENTER].push(locationButton);
-        gMap.addListener('click', (mapsMouseEvent) => {
-            removeMarker();
-            // // Close the current InfoWindow.
-            // infoWindow.close();
-            // // Create a new InfoWindow.
-            // infoWindow = new google.maps.InfoWindow({
-            //     position: mapsMouseEvent.latLng,
-            // });
-            // infoWindow.setContent(
-            //     JSON.stringify(mapsMouseEvent.latLng.toJSON(), null, 2)
-            // );
-            // infoWindow.open(gMap);
-            let lat = JSON.stringify(mapsMouseEvent.latLng.toJSON().lat);
-            let lng = JSON.stringify(mapsMouseEvent.latLng.toJSON().lng);
-            addMarker({ lat: +lat, lng: +lng });
-        });
+  console.log('InitMap');
+  return _connectGoogleApi().then(() => {
+    console.log('google available');
+    gMap = new google.maps.Map(document.querySelector('#map'), {
+      center: { lat, lng },
+      zoom: 15,
     });
+    console.log('Map!', gMap);
+
+    infoWindow = new google.maps.InfoWindow();
+    const locationButton = document.querySelector('button');
+    gMap.controls[google.maps.ControlPosition.TOP_CENTER].push(locationButton);
+    gMap.addListener('click', (mapsMouseEvent) => {
+      removeMarker();
+      let lat = JSON.stringify(mapsMouseEvent.latLng.toJSON().lat);
+      let lng = JSON.stringify(mapsMouseEvent.latLng.toJSON().lng);
+      addMarker({ lat: +lat, lng: +lng });
+    });
+  });
 }
 
 function removeMarker() {
-    for (var i = 0; i < gMarkers.length; i++) {
-        gMarkers[i].setMap(null);
-    }
+  for (var i = 0; i < gMarkers.length; i++) {
+    gMarkers[i].setMap(null);
+  }
 }
 
 function addMarker(loc) {
-    var marker = new google.maps.Marker({
-        position: loc,
-        map: gMap,
-        title: 'Hello World!',
-    });
-    gMarkers.push(marker);
+  var marker = new google.maps.Marker({
+    position: loc,
+    map: gMap,
+    title: 'Hello World!',
+  });
+  gMarkers.push(marker);
 }
 
 function panTo(lat, lng) {
-    var laLatLng = new google.maps.LatLng(lat, lng);
-    gMap.panTo(laLatLng);
+  var laLatLng = new google.maps.LatLng(lat, lng);
+  gMap.panTo(laLatLng);
 }
 
 function _connectGoogleApi() {
-    if (window.google) return Promise.resolve();
-    const API_KEY = 'AIzaSyB86uZViFdxJ6bdlAHwUMF1jG762ZBDIAg';
-    var elGoogleApi = document.createElement('script');
-    elGoogleApi.src = `https://maps.googleapis.com/maps/api/js?key=${API_KEY}`;
-    elGoogleApi.async = true;
-    document.body.append(elGoogleApi);
+  if (window.google) return Promise.resolve();
+  const API_KEY = 'AIzaSyB86uZViFdxJ6bdlAHwUMF1jG762ZBDIAg';
+  var elGoogleApi = document.createElement('script');
+  elGoogleApi.src = `https://maps.googleapis.com/maps/api/js?key=${API_KEY}`;
+  elGoogleApi.async = true;
+  document.body.append(elGoogleApi);
 
-    return new Promise((resolve, reject) => {
-        elGoogleApi.onload = resolve;
-        elGoogleApi.onerror = () => reject('Google script failed to load');
-    });
+  return new Promise((resolve, reject) => {
+    elGoogleApi.onload = resolve;
+    elGoogleApi.onerror = () => reject('Google script failed to load');
+  });
 }
 
 function codeAddress(location, onSuccess, onSuccessPrint) {
-    console.log(location);
-    const prm = axios
+  console.log(location);
+  const prm = axios
+    .get('https://maps.googleapis.com/maps/api/geocode/json', {
+      params: {
+        address: location,
+        key: 'AIzaSyDHb1ruR77Ht3GhRL8lw55udbpxVpCYKXQ',
+      },
+    })
+    .then((response) => {
+      const lat = response.data.results[0].geometry.location.lat;
+      const lng = response.data.results[0].geometry.location.lng;
+      onSuccess(lat, lng);
+      return { lat, lng };
+    })
+    .then((pos) => {
+      const prm = axios
         .get('https://maps.googleapis.com/maps/api/geocode/json', {
-            params: {
-                address: location,
-                key: 'AIzaSyDHb1ruR77Ht3GhRL8lw55udbpxVpCYKXQ',
-            },
+          params: {
+            latlng: pos.lat + ',' + pos.lng,
+            key: 'AIzaSyDHb1ruR77Ht3GhRL8lw55udbpxVpCYKXQ',
+          },
         })
         .then((response) => {
-            const lat = response.data.results[0].geometry.location.lat;
-            const lng = response.data.results[0].geometry.location.lng;
-            onSuccess(lat, lng);
-            return { lat, lng };
-        })
-        .then((pos) => {
-            const prm = axios
-                .get('https://maps.googleapis.com/maps/api/geocode/json', {
-                    params: {
-                        latlng: pos.lat + ',' + pos.lng,
-                        key: 'AIzaSyDHb1ruR77Ht3GhRL8lw55udbpxVpCYKXQ',
-                    },
-                })
-                .then((response) => {
-                    onSuccessPrint(response.data.results[0]['formatted_address']);
-                });
-        })
-        .catch((error) => {
-            console.log(error);
+          onSuccessPrint(response.data.results[0]['formatted_address']);
         });
+    })
+    .catch((error) => {
+      console.log(error);
+    });
 }
