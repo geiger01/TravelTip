@@ -30,7 +30,7 @@
     </header>
     <main class="main-container main-layout">
       <div class="current-location-container">
-        <h3>Location: <span>Lorem, ipsum dolor.</span></h3>
+        <h3>Location: <span class="location"></span></h3>
         <div class="copy-location-btn">Copy Location</div>
       </div>
       <div class="content-container">
@@ -56,15 +56,16 @@
         </div>
         <div id="map"></div>
       </div>
+
       <button onclick="onAddMarker()" class="btn-add-marker">
         Add Marker Specific Location
       </button>
+      <div onclick="onAddLocation()" class="add-btn">Add Location</div>
 
       <button onclick="onGetLocs()" class="btn-get-locs">Get Locations</button>
       <button onclick="onPanTo()" class="btn-pan">Pan Map to Tokyo</button>
     </main>
     <script type="module" src="js/app.controller.js"></script>
     <script src="lib/axios.js"></script>
-</body>
-
+  </body>
 </html>
