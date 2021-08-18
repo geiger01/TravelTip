@@ -162,7 +162,45 @@ body {
   padding: 1rem;
   background-color: #646464;
   grid-area: weather;
+
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  text-align: center;
 }
+
+.weather-container img{
+  height: 100px;
+  width: 100px;
+}
+
+.weather-data{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.weather-row{
+  display: flex;
+  flex-direction:row;
+  justify-content: space-between;
+}
+
+.weather-row>*{
+  padding: 0 1rem;
+}
+
+.top-row{
+  margin-bottom: 1rem;
+}
+
+.bottom-row{
+  
+  margin-top: 1rem;
+}
+
+
+
 
 #map {
   grid-area: map;

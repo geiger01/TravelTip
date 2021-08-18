@@ -1,3 +1,4 @@
+import { weatherService } from './services/weather.service.js';
 import { locService } from './services/loc.service.js';
 import { mapService } from './services/map.service.js';
 
@@ -12,7 +13,7 @@ window.onGetUserPos = onGetUserPos;
 function onInit() {
     mapService
         .initMap()
-        .then(() => {
+        .then((res) => {
             console.log('Map is ready');
         })
         .catch(() => console.log('Error: cannot init map'));
