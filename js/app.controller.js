@@ -78,18 +78,21 @@ function onAddLocation() {
 }
 
 function renderWeather(weatherData){
-    const elWeatherData = document.querySelector('.weather-data');
+    const elWeatherData = document.querySelector('.weather-container');
 
     const weatherStr = `
-    <div class="top-row weather-row">
-        <p>${weatherData.temp}°</p>
-        <p>${weatherData.weather}</p>
-        <p>${weatherData.description}</p>
-    </div>
-    <div class="bottom-row weather-row">
-        <p>min<br><span>${weatherData.temp_min}°</span></p>
-        <p>max<br><span>${weatherData.temp_max}°</span></p>
-        <p>humidity<br><span>${weatherData.humidity}%</span></p>
+    <img src="http://openweathermap.org/img/wn/${weatherData.icon}@2x.png" alt="icon">
+    <div class="weather-data">
+        <div class="top-row weather-row">
+            <p>${weatherData.temp}°</p>
+            <p>${weatherData.weather}</p>
+            <p>${weatherData.description}</p>
+        </div>
+        <div class="bottom-row weather-row">
+            <p class="light-gray">min<br><span>${weatherData.temp_min}°</span></p>
+            <p class="light-gray">max<br><span>${weatherData.temp_max}°</span></p>
+            <p class="light-gray">humidity<br><span>${weatherData.humidity}%</span></p>
+        </div>
     </div>`
 
     elWeatherData.innerHTML = weatherStr;
@@ -117,5 +120,6 @@ function renderSavedLocs(locations){
 }
 
 function onGoToLoc(lat,lng){
+  weatherService.getWeatherByLocation({lat, lng}, renderWeather);
   mapService.panTo(lat,lng)
 }

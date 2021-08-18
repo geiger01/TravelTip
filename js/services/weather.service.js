@@ -16,8 +16,9 @@ function getWeatherByLocation(location, onSuccess){
               humidity: data.main.humidity.toFixed(0),
               weather: data.weather[0].main,
               description: data.weather[0].description,
+              icon: data.weather[0].icon,
               sunrise: data.sys.sunrise,
-              sunset: data.sys.sunset,
+              sunset: data.sys.sunset
             }
             onSuccess(weatherData);
         })
