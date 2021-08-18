@@ -146,12 +146,12 @@ body {
 
 .locations-container {
   padding: 1rem;
-  background-color: #646464;
+  background-color: rgb(168, 168, 168,0.4);
   grid-area: locations;
   display: flex;
   flex-direction: column;
   /* align-items: center; */
-  color: #dddddd;
+  color: #474747;
   gap: 10px;
 height: 100%;
 }
@@ -165,8 +165,10 @@ height: 100%;
 }
 
 .weather-container {
+  color: #616161;
+  font-size: 1.2rem;
   padding: 1rem;
-  background-color: #646464;
+  background-color: rgba(31, 142, 247, 0.2);
   grid-area: weather;
 
   display: flex;
@@ -234,6 +236,12 @@ height: 100%;
   height: 1.5rem;
   background-color: rgb(46, 46, 46);
   color: #dddddd;
+
+  transition: background-color .3s;
+}
+
+.loc-actions:hover{
+  background-color: rgb(180, 180, 180);
 }
 
 .locs{
@@ -242,7 +250,7 @@ height: 100%;
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: #9cc3d1;
+  background-color: #54b9dd;
   border-radius: 20px;
   border: 6px solid transparent;
   background-clip: content-box;

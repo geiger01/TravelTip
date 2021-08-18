@@ -12,6 +12,7 @@ window.onPanTo = onPanTo;
 window.onGetLocs = onGetLocs;
 window.onGetUserPos = onGetUserPos;
 window.onAddLocation = onAddLocation;
+window.onGoToLoc = onGoToLoc;
 window.gSavedLocs = [];
 
 function onInit() {
@@ -107,16 +108,21 @@ function renderSavedLocs(locations){
 
     locations.map(loc => {
 
+      console.log(loc[0]);
       strHtml += `
-
+      
       <h4>${loc.name}</h4>
       
       <div class="actions">
-      <div class="loc-actions">Go</div>
+      <div onclick="onGoToLoc(${loc[0].lat},${loc[0].lng})" class="loc-actions">Go</div>
       <div class="loc-actions">Delete</div>
       </div>
       `
     })
 
     document.querySelector('.locs').innerHTML=strHtml;
+}
+
+function onGoToLoc(lat,lng){
+  mapService.panTo(lat,lng)
 }
