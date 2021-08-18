@@ -33,7 +33,9 @@ function initMap(lat = 32.0749831, lng = 34.9120554) {
             addMarker({ lat: +lat, lng: +lng });
             getAddressByLatLng({ lat, lng }, appController.renderLocation);
             gLocs = [{ lat: +lat, lng: +lng }];
+
         });
+        
     });
 }
 

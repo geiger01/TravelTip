@@ -10,11 +10,11 @@ function getWeatherByLocation(location, onSuccess){
             console.log('weather success:')
             const data = res.data;
             const weatherData = {
-              temp: data.main.temp,
-              feels_like: data.main.feels_like,
-              temp_min: data.main.temp_min,
-              temp_max: data.main.temp_max,
-              humidity: data.main.humidity,
+              temp: data.main.temp.toFixed(0),
+              feels_like: data.main.feels_like.toFixed(0),
+              temp_min: data.main.temp_min.toFixed(0),
+              temp_max: data.main.temp_max.toFixed(0),
+              humidity: data.main.humidity.toFixed(0),
               weather: data.weather[0].main,
               description: data.weather[0].description,
               sunrise: data.sys.sunrise,

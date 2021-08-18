@@ -16,8 +16,9 @@ window.onAddLocation = onAddLocation;
 function onInit() {
     mapService
         .initMap()
-        .then((res) => {
+        .then(() => {
             console.log('Map is ready');
+            weatherService.getWeatherByLocation({lat: 32.0749831, lng: 34.9120554}, renderWeather);
         })
         .catch(() => console.log('Error: cannot init map'));
 }
@@ -33,6 +34,7 @@ function getPosition() {
 function onAddMarker() {
     console.log('Adding a marker');
     mapService.addMarker({ lat: 32.0749831, lng: 34.9120554 });
+    weatherService.getWeatherByLocation({lat: 32.0749831, lng: 34.9120554}, renderWeather);
 }
 
 function onGetLocs() {
@@ -71,4 +73,22 @@ function renderLocation(location) {
 
 function onAddLocation() {
     const lastPos = mapService.getLastLoc();
+}
+
+function renderWeather(weatherData){
+    const elWeatherData = document.querySelector('.weather-data');
+
+    const weatherStr = `
+    <div class="top-row weather-row">
+        <p>${weatherData.temp}°</p>
+        <p>${weatherData.weather}</p>
+        <p>${weatherData.description}</p>
+    </div>
+    <div class="bottom-row weather-row">
+        <p>min<br><span>${weatherData.temp_min}°</span></p>
+        <p>max<br><span>${weatherData.temp_max}°</span></p>
+        <p>humidity<br><span>${weatherData.humidity}%</span></p>
+    </div>`
+
+    elWeatherData.innerHTML = weatherStr;
 }
