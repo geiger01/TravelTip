@@ -381,4 +381,34 @@ height: 100%;
   .locations-container .item span {
     font-size: 0.6rem;
   }
+
+   .current-location-container{
+     flex-direction: column;
+     align-items: center;
+     margin-bottom: 1rem;
+   }
+
+   .current-location-container h3{
+     font-size: 1rem;
+    }
+    .current-location-container .add-btn{
+      width: 8rem;
+      height: 2rem;
+      font-size: 1rem;
+    }
+/*     
+    .weather-container p{
+     font-size: 1rem;
+     
+    } */
+    
+    .weather-container{
+     font-size:.8rem;
+
+   }
+    .weather-container img{
+     display: none;
+
+   }
+ 
 }
