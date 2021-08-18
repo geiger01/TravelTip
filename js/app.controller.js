@@ -54,6 +54,7 @@ function onGetUserPos() {
 }
 
 function onPanTo() {
+<<<<<<< HEAD
   const searchLocation = document.querySelector('.location-input').value;
   console.log('Panning the Map');
   mapService.codeAddress(searchLocation, mapService.panTo);
@@ -61,4 +62,13 @@ function onPanTo() {
 
 function onAddLocation() {
   console.log('dsa');
+=======
+    const searchLocation = document.querySelector('.location-input').value;
+    console.log('Panning the Map');
+    mapService.codeAddress(searchLocation, mapService.panTo, renderLocation)
+}
+
+function renderLocation(location) {
+    document.querySelector('.location').innerText = location;
+>>>>>>> 003b0ce818d15b87f7f7c2e41b2730428dae662c
 }
