@@ -29,7 +29,14 @@
         <h3>Location: <span>Lorem, ipsum dolor.</span></h3>
         <div class="copy-location-btn">Copy Location</div>
       </div>
-      <div id="map"></div>
+      <div class="content-container">
+        <div class="locations-container">
+          <p>You are at: <span class="user-pos"></span></p>
+          <p>Locations: <span class="locs"></span></p>
+        </div>
+        <div class="weather-container">weather api</div>
+        <div id="map"></div>
+      </div>
       <button onclick="onAddMarker()" class="btn-add-marker">
         Add Marker Specific Location
       </button>
@@ -39,8 +46,6 @@
 
       <button onclick="onGetLocs()" class="btn-get-locs">Get Locations</button>
       <button onclick="onPanTo()" class="btn-pan">Pan Map to Tokyo</button>
-      <p>You are at: <span class="user-pos"></span></p>
-      <p>Locations: <span class="locs"></span></p>
     </main>
     <script type="module" src="js/app.controller.js"></script>
   </body>
