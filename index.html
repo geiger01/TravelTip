@@ -1,45 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
+  <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700&display=swap"
-        rel="stylesheet" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700&display=swap"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="styles/style.css" />
     <title>TravelTip</title>
-</head>
+  </head>
 
-<body>
-    <h1>TravelTip Starter</h1>
-    <div id="map" style="width: 100%; height: 400px"></div>
-    <button onclick="onAddMarker()" class="btn-add-marker">
+  <body>
+    <header class="main-header">
+      <nav class="main-nav main-layout">
+        <h1 class="logo">TravelTip</h1>
+        <div class="search-container">
+          <input type="text" placeholder="Enter Location" />
+          <div class="go">Go</div>
+          <div class="my-location">My Location</div>
+        </div>
+      </nav>
+    </header>
+    <main class="main-container main-layout">
+      <div class="current-location-container">
+        <h3>Location: <span>Lorem, ipsum dolor.</span></h3>
+        <div class="copy-location-btn">Copy Location</div>
+      </div>
+      <div id="map"></div>
+      <button onclick="onAddMarker()" class="btn-add-marker">
         Add Marker Specific Location
-    </button>
-    <button onclick="onGetUserPos()" class="btn-user-pos">
+      </button>
+      <button onclick="onGetUserPos()" class="btn-user-pos">
         Get User Position
-    </button>
+      </button>
 
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>TravelTip</title>
-    </head>
-
-    <body>
-        <h1>TravelTip</h1>
-        <div id="map" style="width: 100%; height: 400px;"></div>
-        <button onclick="onAddMarker()" class="btn-add-marker">Add Marker Specific Location</button>
-        <button onclick="onGetUserPos()" class="btn-user-pos">Get User Position</button>
-        <button onclick="onGetLocs()" class="btn-get-locs">Get Locations</button>
-        <button onclick="onPanTo()" class="btn-pan">Pan Map to Tokyo</button>
-
-        <p>You are at: <span class="user-pos"></span></p>
-        <p>Locations: <span class="locs"></span></p>
-
-        <script type="module" src="js/app.controller.js"></script>
-    </body>
-
+      <button onclick="onGetLocs()" class="btn-get-locs">Get Locations</button>
+      <button onclick="onPanTo()" class="btn-pan">Pan Map to Tokyo</button>
+      <p>You are at: <span class="user-pos"></span></p>
+      <p>Locations: <span class="locs"></span></p>
+    </main>
+    <script type="module" src="js/app.controller.js"></script>
+  </body>
 </html>
