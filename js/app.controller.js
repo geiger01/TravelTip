@@ -11,6 +11,7 @@ window.onPanTo = onPanTo;
 window.onGetLocs = onGetLocs;
 window.onGetUserPos = onGetUserPos;
 window.onAddLocation = onAddLocation;
+window.gSavedLocs = [];
 
 function onInit() {
   mapService
@@ -69,4 +70,31 @@ function renderLocation(location) {
 
 function onAddLocation() {
   const lastPos = mapService.getLastLoc();
+  const name = document.querySelector('.location').innerText;
+  console.log(name);
+   lastPos['name'] = name;
+ 
+    gSavedLocs.push(lastPos);
+    renderSavedLocs(gSavedLocs)
+ 
+}
+
+function renderSavedLocs(locations){
+
+    let strHtml = ''
+
+    locations.map(loc => {
+
+      strHtml += `
+
+      <h4>${loc.name}</h4>
+      
+      <div class="actions">
+      <div class="loc-actions">Go</div>
+      <div class="loc-actions">Delete</div>
+      </div>
+      `
+    })
+
+    document.querySelector('.locs').innerHTML=strHtml;
 }
