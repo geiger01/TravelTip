@@ -58,6 +58,9 @@ function onGetUserPos() {
 function onPanTo() {
     const searchLocation = document.querySelector('.location-input').value;
     console.log('Panning the Map');
-    mapService.codeAddress(searchLocation, mapService.panTo)
+    mapService.codeAddress(searchLocation, mapService.panTo, renderLocation)
 }
 
+function renderLocation(location) {
+    document.querySelector('.location').innerText = location;
+}
