@@ -83,7 +83,6 @@ function onAddLocation() {
  
 }
 
-<<<<<<< HEAD
 function renderWeather(weatherData){
     const elWeatherData = document.querySelector('.weather-data');
 
@@ -100,7 +99,8 @@ function renderWeather(weatherData){
     </div>`
 
     elWeatherData.innerHTML = weatherStr;
-=======
+}
+
 function renderSavedLocs(locations){
 
     let strHtml = ''
@@ -119,5 +119,4 @@ function renderSavedLocs(locations){
     })
 
     document.querySelector('.locs').innerHTML=strHtml;
->>>>>>> 5e7682a98aaee299c5683594e4a53582810204a8
 }

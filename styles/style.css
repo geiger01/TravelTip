@@ -205,9 +205,6 @@ height: 100%;
   margin-top: 1rem;
 }
 
-<<<<<<< HEAD
-
-=======
 .add-btn {
   cursor: pointer;
   display: flex;
@@ -259,7 +256,6 @@ height: 100%;
 ::-webkit-scrollbar-thumb:hover {
   background-color: #d1b9b9;
 }
->>>>>>> 5e7682a98aaee299c5683594e4a53582810204a8
 
 
 #map {
