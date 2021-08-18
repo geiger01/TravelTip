@@ -1,5 +1,5 @@
-import { locService } from './services/loc.service.js'
-import { mapService } from './services/map.service.js'
+import { locService } from './services/loc.service.js';
+import { mapService } from './services/map.service.js';
 
 
 window.onload = onInit;
@@ -10,7 +10,8 @@ window.onGetUserPos = onGetUserPos;
 
 
 function onInit() {
-    mapService.initMap()
+    mapService
+        .initMap()
         .then(() => {
             console.log('Map is ready');
         })
@@ -21,8 +22,8 @@ function onInit() {
 function getPosition() {
     console.log('Getting Pos');
     return new Promise((resolve, reject) => {
-        navigator.geolocation.getCurrentPosition(resolve, reject)
-    })
+        navigator.geolocation.getCurrentPosition(resolve, reject);
+    });
 }
 
 function onAddMarker() {
