@@ -5,6 +5,8 @@ export const mapService = {
     codeAddress,
 };
 
+import { appController } from '../app.controller.js';
+
 let gMap, infoWindow;
 let gMarkers = [];
 
@@ -26,6 +28,7 @@ function initMap(lat = 32.0749831, lng = 34.9120554) {
             let lat = JSON.stringify(mapsMouseEvent.latLng.toJSON().lat);
             let lng = JSON.stringify(mapsMouseEvent.latLng.toJSON().lng);
             addMarker({ lat: +lat, lng: +lng });
+            getAddressByLatLng({ lat, lng }, appController.renderLocation)
         });
     });
 }
@@ -64,7 +67,7 @@ function _connectGoogleApi() {
     });
 }
 
-function codeAddress(location, onSuccess, onSuccessPrint) {
+function codeAddress(location, onSuccess) {
     console.log(location);
     const prm = axios
         .get('https://maps.googleapis.com/maps/api/geocode/json', {
@@ -81,18 +84,23 @@ function codeAddress(location, onSuccess, onSuccessPrint) {
             return { lat, lng };
         })
         .then((pos) => {
-            const prm = axios
-                .get('https://maps.googleapis.com/maps/api/geocode/json', {
-                    params: {
-                        latlng: pos.lat + ',' + pos.lng,
-                        key: 'AIzaSyDHb1ruR77Ht3GhRL8lw55udbpxVpCYKXQ',
-                    },
-                })
-                .then((response) => {
-                    onSuccessPrint(response.data.results[0]['formatted_address']);
-                });
+            getAddressByLatLng(pos, renderLocation)
         })
         .catch((error) => {
             console.log(error);
+        });
+}
+
+
+function getAddressByLatLng(pos, onSuccess) {
+    const prm = axios
+        .get('https://maps.googleapis.com/maps/api/geocode/json', {
+            params: {
+                latlng: pos.lat + ',' + pos.lng,
+                key: 'AIzaSyDHb1ruR77Ht3GhRL8lw55udbpxVpCYKXQ',
+            },
+        })
+        .then((response) => {
+            onSuccess(response.data.results[0]['formatted_address']);
         });
 }
