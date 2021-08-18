@@ -12,13 +12,14 @@ window.onPanTo = onPanTo;
 window.onGetUserPos = onGetUserPos;
 window.onAddLocation = onAddLocation;
 window.onGoToLoc = onGoToLoc;
+window.onDeleteLoc = onDeleteLoc;
 document.querySelector('#map').addEventListener('click', ()=>{
     onAddMarker(mapService.getLastLoc()[0]);
 });
 
-window.gSavedLocs = [];
 
 function onInit() {
+  renderSavedLocs()
     mapService
         .initMap()
         .then(() => {
@@ -70,11 +71,10 @@ function renderLocation(location) {
 function onAddLocation() {
   const lastPos = mapService.getLastLoc();
   const name = document.querySelector('.location').innerText;
-  console.log(name);
-  lastPos['name'] = name;
- 
-  gSavedLocs.push(lastPos);
-  renderSavedLocs(gSavedLocs)
+
+  lastPos[0].name = name;
+  locService.saveLocation(lastPos)
+  renderSavedLocs()
 }
 
 function renderWeather(weatherData){
@@ -98,20 +98,18 @@ function renderWeather(weatherData){
     elWeatherData.innerHTML = weatherStr;
 }
 
-function renderSavedLocs(locations){
+function renderSavedLocs(){
 
     let strHtml = ''
+     const locs= locService.getLocsForDisplay()
+    //  console.log(loc);
 
-    locations.map(loc => {
-
-      console.log(loc[0]);
+    locs.map(loc => {
       strHtml += `
-      
-      <h4>${loc.name}</h4>
-      
+      <h4>${loc[0].name}</h4>
       <div class="actions">
       <div onclick="onGoToLoc(${loc[0].lat},${loc[0].lng})" class="loc-actions">Go</div>
-      <div class="loc-actions">Delete</div>
+      <div onclick="onDeleteLoc(${loc[0].id})" class="loc-actions">Delete</div>
       </div>
       `
     })
@@ -122,4 +120,10 @@ function renderSavedLocs(locations){
 function onGoToLoc(lat,lng){
   weatherService.getWeatherByLocation({lat, lng}, renderWeather);
   mapService.panTo(lat,lng)
+}
+
+function onDeleteLoc(id){
+
+  locService.deleteLoc(id)
+  renderSavedLocs()
 }
