@@ -14,6 +14,7 @@ window.onGetUserPos = onGetUserPos;
 window.onAddLocation = onAddLocation;
 window.onGoToLoc = onGoToLoc;
 window.onDeleteLoc = onDeleteLoc;
+window.renderLocation = renderLocation;
 document.querySelector('#map').addEventListener('click', () => {
     onAddMarker(mapService.getLastLoc()[0]);
 });
